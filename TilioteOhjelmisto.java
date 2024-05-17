@@ -8,13 +8,26 @@ import java.util.Scanner;
 
 public class TilioteOhjelmisto {
 
-    public List<Tilitapahtuma> etsiVuokratulot(List<Tilitapahtuma> tilitapahutmat) {
-        return null;
+    public static List<Tilitapahtuma> etsiVuokratulot(List<Tilitapahtuma> tilitapahtumat) {
+        return tilitapahtumat.stream()
+                .filter((tilitapahtuma -> tilitapahtuma.getToimittajanNimi().equals("Jarvinen MATIAS PETTERI")))
+                .toList();
     }
 
-    public HashMap<Integer, Double> etsiTulotKuukausittain(List<Tilitapahtuma> tilitapahtumat) {
-        return null;
+    public static HashMap<Integer, Double> etsiTulotKuukausittain(List<Tilitapahtuma> tilitapahtumat) {
+        HashMap<Integer, Double> tulot = new HashMap<>();
+        for (Tilitapahtuma tilitapahtuma : tilitapahtumat) {
+            if (tilitapahtuma.getSumma() < 0) {
+                continue;
+            }
+            Integer kuukausi = tilitapahtuma.getPaivamaara().getMonthValue();
+            double nykyinenSumma = tulot.getOrDefault(kuukausi, 0.0);
+            tulot.put(kuukausi, nykyinenSumma + tilitapahtuma.getSumma());
+        }
+        return tulot;
     }
+
+    
 
     public static void main(String[] args) {
         Scanner tiedostonlukija;
@@ -45,6 +58,8 @@ public class TilioteOhjelmisto {
             e.printStackTrace();
         }
 
-        System.out.println(tilitapahtumat);
+        List<String> kuukaudetListassa = List.of("Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu",
+                "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu");
+
     }
 }
