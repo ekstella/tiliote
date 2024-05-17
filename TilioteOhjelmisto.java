@@ -76,7 +76,7 @@ public class TilioteOhjelmisto {
         System.out.println("Tulostetaan koulun Paaraide ruokalan ruokailukulut tiedoston aikajanteelta:");
         System.out
                 .println("AMICA PAARAIDE RUOKAMENOT TALLA JAKSOLLA: " + (int) etsiRuokalaKulut(tilitapahtumat).stream()
-                        .mapToDouble((tilitapahtuma -> tilitapahtuma.getSumma())).sum());
+                        .mapToDouble((tilitapahtuma -> tilitapahtuma.getSumma())).sum() + " euroa");
         System.out.println("Tulostetaan autoilun polttoainekuluja tiedoston aikajanteella: ");
         System.out.println("POLTTOAINEKULUT TALLA JAKSOLLA: " + (int) etsiPolttoainekulut(tilitapahtumat).stream()
                 .mapToDouble((tilitapahtuma -> tilitapahtuma.getSumma())).sum() + " euroa");
