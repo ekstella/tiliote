@@ -33,6 +33,13 @@ public class TilioteOhjelmisto {
                 .toList();
     }
 
+    public static List<Tilitapahtuma> etsiPolttoainekulut(List<Tilitapahtuma> tilitapahtumat) {
+        return tilitapahtumat.stream()
+                .filter((tilitapahtuma -> tilitapahtuma.getToimittajanNimi().toLowerCase().contains("neste")
+                        || tilitapahtuma.getToimittajanNimi().toLowerCase().contains("teboil")))
+                .toList();
+    }
+
     public static void main(String[] args) {
         Scanner tiedostonlukija;
         List<Tilitapahtuma> tilitapahtumat = new ArrayList<>();
@@ -69,5 +76,8 @@ public class TilioteOhjelmisto {
         System.out
                 .println("AMICA PAARAIDE RUOKAMENOT TALLA JAKSOLLA: " + (int) etsiRuokalaKulut(tilitapahtumat).stream()
                         .mapToDouble((tilitapahtuma -> tilitapahtuma.getSumma())).sum());
+        System.out.println("Tulostetaan autoilun polttoainekuluja tiedoston aikajanteella: ");
+        System.out.println("POLTTOAINEKULUT TALLA JAKSOLLA: " + (int) etsiPolttoainekulut(tilitapahtumat).stream()
+                .mapToDouble((tilitapahtuma -> tilitapahtuma.getSumma())).sum() + " euroa");
     }
 }
