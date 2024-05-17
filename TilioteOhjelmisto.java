@@ -27,7 +27,11 @@ public class TilioteOhjelmisto {
         return tulot;
     }
 
-    
+    public static List<Tilitapahtuma> etsiRuokalaKulut(List<Tilitapahtuma> tilitapahtumat) {
+        return tilitapahtumat.stream()
+                .filter((tilitapahtuma -> tilitapahtuma.getToimittajanNimi().contains("Compass Group Finland")))
+                .toList();
+    }
 
     public static void main(String[] args) {
         Scanner tiedostonlukija;
@@ -61,5 +65,9 @@ public class TilioteOhjelmisto {
         List<String> kuukaudetListassa = List.of("Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu",
                 "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu");
 
+        System.out.println("Tulostetaan koulun Paaraide ruokalan ruokailukulut tiedoston aikajanteelta:");
+        System.out
+                .println("AMICA PAARAIDE RUOKAMENOT TALLA JAKSOLLA: " + (int) etsiRuokalaKulut(tilitapahtumat).stream()
+                        .mapToDouble((tilitapahtuma -> tilitapahtuma.getSumma())).sum());
     }
 }
