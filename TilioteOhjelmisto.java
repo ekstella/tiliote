@@ -79,5 +79,7 @@ public class TilioteOhjelmisto {
         System.out.println("Tulostetaan autoilun polttoainekuluja tiedoston aikajanteella: ");
         System.out.println("POLTTOAINEKULUT TALLA JAKSOLLA: " + (int) etsiPolttoainekulut(tilitapahtumat).stream()
                 .mapToDouble((tilitapahtuma -> tilitapahtuma.getSumma())).sum() + " euroa");
+        System.out.println("Marraskuun tulot");
+        System.out.println("11: " + etsiTulotKuukausittain(tilitapahtumat).get(11).intValue());
     }
 }
