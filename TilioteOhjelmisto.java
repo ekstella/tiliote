@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class TilioteOhjelmisto {
 
     public static List<Tilitapahtuma> etsiVuokratulot(List<Tilitapahtuma> tilitapahtumat) {
         return tilitapahtumat.stream()
                 .filter((tilitapahtuma -> tilitapahtuma.getToimittajanNimi().equals("Jarvinen MATIAS PETTERI")))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public static HashMap<Integer, Double> etsiTulotKuukausittain(List<Tilitapahtuma> tilitapahtumat) {
@@ -30,14 +31,14 @@ public class TilioteOhjelmisto {
     public static List<Tilitapahtuma> etsiRuokalaKulut(List<Tilitapahtuma> tilitapahtumat) {
         return tilitapahtumat.stream()
                 .filter((tilitapahtuma -> tilitapahtuma.getToimittajanNimi().contains("Compass Group Finland")))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public static List<Tilitapahtuma> etsiPolttoainekulut(List<Tilitapahtuma> tilitapahtumat) {
         return tilitapahtumat.stream()
                 .filter((tilitapahtuma -> tilitapahtuma.getToimittajanNimi().toLowerCase().contains("neste")
                         || tilitapahtuma.getToimittajanNimi().toLowerCase().contains("teboil")))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public static void main(String[] args) {
